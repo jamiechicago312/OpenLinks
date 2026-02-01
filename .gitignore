@@ -55,4 +55,6 @@ htmlcov/
 # Misc
 *.log
 .cache/
-OpenLinks/
+
+# OpenHands output
+output/
