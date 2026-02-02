@@ -78,7 +78,7 @@ Label: openlinks
 
 ### Prerequisites
 1. GitHub repository with write access
-2. LLM API key (OpenAI, Anthropic, or OpenHands)
+2. OpenHands API key (get from [OpenHands](https://app.all-hands.dev/))
 
 ### Setup (5 minutes)
 
@@ -88,14 +88,15 @@ Label: openlinks
    cd openlinks
    ```
 
-2. **Add GitHub Secrets**
-   - Go to Settings → Secrets and variables → Actions
-   - Add `LLM_API_KEY` with your LLM API key
+2. **Add GitHub Secret**
+   - Go to Settings → Secrets and variables → Actions → Secrets
+   - Add `LLM_API_KEY` with your OpenHands API key (starts with `sk-oh-...`)
 
 3. **Optional: Configure LLM Model**
    - Go to Settings → Secrets and variables → Actions → Variables
-   - Add `LLM_MODEL` (default: `gpt-4o`)
-   - Examples: `anthropic/claude-sonnet-4-5-20250929`, `gpt-4o`
+   - Add `LLM_MODEL` if you want to override the default
+   - Default: `claude-sonnet-4-5-20250929`
+   - Other options: `gpt-4o`, `gpt-4-turbo`, etc.
 
 4. **Enable GitHub Actions**
    - Go to Actions tab and enable workflows
