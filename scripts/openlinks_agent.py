@@ -138,7 +138,7 @@ def classify_request(issue_title: str, issue_body: str) -> str:
         from openai import OpenAI
         
         api_key = os.getenv("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "claude-sonnet-4-5-20250929")
+        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
         base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         if not api_key:
@@ -184,7 +184,7 @@ def parse_link_operation(request_text: str) -> dict:
         from openai import OpenAI
         
         api_key = os.getenv("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "claude-sonnet-4-5-20250929")
+        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
         base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         if not api_key:
@@ -395,7 +395,7 @@ def handle_feature_request(issue_number: str, issue_title: str, issue_body: str)
         
         # Configure LLM
         api_key = get_env_or_exit("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "claude-sonnet-4-5-20250929")
+        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
         base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         llm_config = {

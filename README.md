@@ -95,8 +95,8 @@ Label: openlinks
 3. **Optional: Configure LLM Model**
    - Go to Settings → Secrets and variables → Actions → Variables
    - Add `LLM_MODEL` if you want to override the default
-   - Default: `claude-sonnet-4-5-20250929`
-   - Other options: `gpt-4o`, `gpt-4-turbo`, etc.
+   - Default: `gemini-2.0-flash-exp`
+   - Other options: `claude-sonnet-4-5-20250929`, `gpt-4o`, `gpt-4-turbo`, etc.
 
 4. **Enable GitHub Actions**
    - Go to Actions tab and enable workflows
