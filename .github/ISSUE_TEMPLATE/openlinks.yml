@@ -1,0 +1,107 @@
+name: 🔗 OpenLinks Request
+description: Create, update, delete links, or request features
+title: ""
+labels: ["openlinks"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## OpenLinks Agent 🤖
+        
+        Describe what you want in **natural language** and the agent will handle it!
+  
+  - type: textarea
+    id: request
+    attributes:
+      label: Your Request
+      description: Write what you want in plain English
+      placeholder: |
+        Examples:
+        
+        📝 Create Links:
+        - "Shorten luma.com to /luma"
+        - "Create /docs → docs.openhands.dev with newsletter UTMs"
+        - "Make /promo → example.com/sale, expires in 2 weeks, redirect to homepage after"
+        
+        🔄 Update Links:
+        - "Update /docs to point to new-domain.com"
+        - "Extend /promo expiration by 1 week"
+        
+        🗑️ Delete Links:
+        - "Delete /old-link"
+        - "Delete all links tagged january"
+        
+        📋 List Links:
+        - "List all newsletter links"
+        - "Show me all links tagged promo"
+        
+        ⚙️ Feature Requests:
+        - "Add QR code generation with custom colors"
+        - "Integrate analytics tracking"
+    validations:
+      required: true
+  
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ### 📖 Available Parameters
+        
+        The agent understands these parameters (mix and match as needed):
+        
+        **Link Settings:**
+        - `slug` - Short path (e.g., /luma)
+        - `destination` - Full URL to redirect to
+        
+        **UTM Tracking:**
+        - `utm_source` - newsletter, twitter, email, etc.
+        - `utm_medium` - email, social, cpc, etc.
+        - `utm_campaign` - january-2024, product-launch, etc.
+        - `utm_content` - header-link, footer-link, etc.
+        - `utm_term` - keyword tracking
+        
+        **Expiration:**
+        - `expires` - "next week", "2 weeks", "30 days", "2024-12-31"
+        - `redirect after expiry` - URL to redirect to when expired
+        
+        **Organization:**
+        - `tags` - newsletter, promo, january (comma-separated)
+        - `description` - Optional notes about the link
+        
+        ---
+        
+        ### 🎯 Quick Examples
+        
+        ```
+        Simple:
+        "Create /test → example.com"
+        
+        With UTMs:
+        "Shorten luma.com to /luma with newsletter UTMs and email medium"
+        
+        With Expiration:
+        "Create /sale → store.com/sale, expires in 1 week"
+        
+        Full Featured:
+        "Create /promo → store.com/promo with newsletter UTMs, 
+         expires next week, redirect to homepage after, 
+         tagged with promo and january"
+        
+        Update:
+        "Update /docs destination to docs.new-site.com"
+        
+        Delete:
+        "Delete all links tagged january"
+        
+        Feature Request:
+        "Add ability to generate QR codes for links"
+        ```
+        
+        ---
+        
+        **Once submitted, the agent will:**
+        1. ✅ Parse your request
+        2. ✅ Execute the operation
+        3. ✅ Commit changes
+        4. ✅ Comment back with results

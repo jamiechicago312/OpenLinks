@@ -1,0 +1,12 @@
+{
+  "base_url": "https://go.openhands.dev",
+  "primary_domain": "https://openhands.dev",
+  "default_utm_medium": "link",
+  "default_expiration_days": null,
+  "qr_defaults": {
+    "bg_color": "#FFFFFF",
+    "fg_color": "#000000",
+    "include_logo": true,
+    "error_correction": "H"
+  }
+}
