@@ -138,16 +138,14 @@ def classify_request(issue_title: str, issue_body: str) -> str:
         from openai import OpenAI
         
         api_key = os.getenv("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "gpt-4o")
-        base_url = os.getenv("LLM_BASE_URL")
+        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
+        base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         if not api_key:
             print("⚠️  LLM_API_KEY not set, defaulting to LINK operation")
             return "LINK"
         
-        client_kwargs = {"api_key": api_key}
-        if base_url:
-            client_kwargs["base_url"] = base_url
+        client_kwargs = {"api_key": api_key, "base_url": base_url}
         
         client = OpenAI(**client_kwargs)
         
@@ -186,15 +184,13 @@ def parse_link_operation(request_text: str) -> dict:
         from openai import OpenAI
         
         api_key = os.getenv("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "gpt-4o")
-        base_url = os.getenv("LLM_BASE_URL")
+        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
+        base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         if not api_key:
             raise ValueError("LLM_API_KEY not set")
         
-        client_kwargs = {"api_key": api_key}
-        if base_url:
-            client_kwargs["base_url"] = base_url
+        client_kwargs = {"api_key": api_key, "base_url": base_url}
         
         client = OpenAI(**client_kwargs)
         
@@ -399,18 +395,16 @@ def handle_feature_request(issue_number: str, issue_title: str, issue_body: str)
         
         # Configure LLM
         api_key = get_env_or_exit("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "anthropic/claude-sonnet-4-5-20250929")
-        base_url = os.getenv("LLM_BASE_URL")
+        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
+        base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         llm_config = {
             "model": model,
             "api_key": api_key,
+            "base_url": base_url,
             "usage_id": "openlinks_agent",
             "drop_params": True,
         }
-        
-        if base_url:
-            llm_config["base_url"] = base_url
         
         llm = LLM(**llm_config)
         
