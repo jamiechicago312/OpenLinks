@@ -69,6 +69,23 @@ def setup_git():
     run_command('git config user.email "openhands@all-hands.dev"')
 
 
+def react_to_issue(issue_number: str, reaction: str = "+1"):
+    """Add a reaction to the GitHub issue"""
+    repo = os.getenv("GITHUB_REPOSITORY", "")
+    
+    if not repo:
+        print("⚠️  GITHUB_REPOSITORY not set, skipping reaction")
+        return
+    
+    cmd = f'gh api repos/{repo}/issues/{issue_number}/reactions -f content={reaction}'
+    result = run_command(cmd, check=False)
+    
+    if result.returncode != 0:
+        print(f"⚠️  Failed to add reaction: {result.stderr}")
+    else:
+        print(f"👍 Added {reaction} reaction to issue")
+
+
 def comment_on_issue(issue_number: str, comment: str):
     """Post a comment on the GitHub issue using gh CLI"""
     repo = os.getenv("GITHUB_REPOSITORY", "")
@@ -87,6 +104,23 @@ def comment_on_issue(issue_number: str, comment: str):
         print(f"⚠️  Failed to comment on issue: {result.stderr}")
     else:
         print("✅ Posted comment on issue")
+
+
+def close_issue(issue_number: str, reason: str = "completed"):
+    """Close the GitHub issue"""
+    repo = os.getenv("GITHUB_REPOSITORY", "")
+    
+    if not repo:
+        print("⚠️  GITHUB_REPOSITORY not set, skipping close")
+        return
+    
+    cmd = f'gh issue close {issue_number} --reason {reason} --repo {repo}'
+    result = run_command(cmd, check=False)
+    
+    if result.returncode != 0:
+        print(f"⚠️  Failed to close issue: {result.stderr}")
+    else:
+        print("✅ Closed issue")
 
 
 def classify_request(issue_title: str, issue_body: str) -> str:
@@ -138,7 +172,7 @@ def classify_request(issue_title: str, issue_body: str) -> str:
         from openai import OpenAI
         
         api_key = os.getenv("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
+        model = os.getenv("LLM_MODEL", "claude-sonnet-4-5-20250929")
         base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         if not api_key:
@@ -184,7 +218,7 @@ def parse_link_operation(request_text: str) -> dict:
         from openai import OpenAI
         
         api_key = os.getenv("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
+        model = os.getenv("LLM_MODEL", "claude-sonnet-4-5-20250929")
         base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         if not api_key:
@@ -395,7 +429,7 @@ def handle_feature_request(issue_number: str, issue_title: str, issue_body: str)
         
         # Configure LLM
         api_key = get_env_or_exit("LLM_API_KEY")
-        model = os.getenv("LLM_MODEL", "gemini-2.0-flash-exp")
+        model = os.getenv("LLM_MODEL", "claude-sonnet-4-5-20250929")
         base_url = os.getenv("LLM_BASE_URL", "https://llm-proxy.app.all-hands.dev/")
         
         llm_config = {
@@ -464,6 +498,9 @@ def main():
     print(f"Title: {issue_title}")
     print(f"Body: {issue_body[:100]}...")
     
+    # React with thumbs up to acknowledge
+    react_to_issue(issue_number, "+1")
+    
     # Classify request
     print("\n🔍 Classifying request...")
     request_type = classify_request(issue_title, issue_body)
@@ -496,6 +533,9 @@ def main():
         
         # Comment on issue
         comment_on_issue(issue_number, result_message)
+    
+    # Close the issue after successful completion
+    close_issue(issue_number, "completed")
     
     print("\n✅ OpenLinks Agent finished!")
 
