@@ -1,0 +1,21 @@
+{
+  "id": "lu_20260202_023510",
+  "slug": "lu",
+  "destination": "https://lu.ma",
+  "created_at": "2026-02-02T02:35:10.744382Z",
+  "created_by": "openlinks-agent",
+  "expires_at": null,
+  "redirect_after_expiry": null,
+  "tags": [
+    "issue-2"
+  ],
+  "utm_params": {},
+  "qr_config": {
+    "enabled": false,
+    "file_path": null
+  },
+  "metadata": {
+    "description": "Link to https://lu.ma",
+    "last_modified": "2026-02-02T02:35:10.744387Z"
+  }
+}

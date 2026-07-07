@@ -1,0 +1,25 @@
+{
+  "id": "ggl_20260202_234812",
+  "slug": "ggl",
+  "destination": "https://google.com",
+  "created_at": "2026-02-02T23:48:12.335860Z",
+  "created_by": "openlinks-agent",
+  "expires_at": null,
+  "redirect_after_expiry": null,
+  "tags": [
+    "february",
+    "issue-9"
+  ],
+  "utm_params": {
+    "utm_source": "newsletter",
+    "utm_campaign": "february"
+  },
+  "qr_config": {
+    "enabled": false,
+    "file_path": null
+  },
+  "metadata": {
+    "description": "Link to https://google.com",
+    "last_modified": "2026-02-02T23:48:12.335867Z"
+  }
+}
