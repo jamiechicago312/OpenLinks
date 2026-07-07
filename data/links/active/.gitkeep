@@ -1,0 +1,14 @@
+# Add short-link JSON files here.
+#
+# Each file is one link. Example:
+#
+# {
+#   "slug": "luma",
+#   "destination": "https://lu.ma/openhands",
+#   "permanent": false,
+#   "description": "Community call landing page",
+#   "tags": ["newsletter", "events"]
+# }
+#
+# Required fields: slug, destination
+# Optional fields: permanent (default false), description, tags

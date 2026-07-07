@@ -1,0 +1,9 @@
+{
+  "name": "openlinks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vercel-hosted short link service",
+  "scripts": {
+    "test": "node --test"
+  }
+}
