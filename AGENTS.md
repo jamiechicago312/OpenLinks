@@ -62,8 +62,8 @@ If it prints anything else, fix the author (`git commit --amend
 `jamiechicago312/OpenLinks` - a tiny short-link service. Each short
 link is a JSON file under `data/links/active/`, and a single Vercel
 serverless function performs a 307/308 redirect to the configured
-destination. There is intentionally no UI, no admin panel, and no
-tracking layer.
+destination. There is intentionally no UI and no admin panel. Click
+notifications are opt-in via Telegram (see Conventions).
 
 ## Stack
 
@@ -83,13 +83,27 @@ tracking layer.
 
 ## Conventions
 
-- **One short link = one JSON file** in `data/links/active/`. Keep
-  filenames short and stable; the basename (without `.json`) is the
-  public short path.
-- **Never add tracking.** The redirect handler is intentionally
-  side-effect free - no analytics calls, no cookies, no logging of
-  referrer / IP / UA. The `Cache-Control: no-store` header is set on
-  every redirect for that reason.
+- **One short link = one JSON file** in `data/links/active/`. The
+  public short path is the `slug` field inside the file, not the
+  filename - keep both consistent anyway, so anyone browsing the
+  directory can guess the slug without opening the file.
+- **Never add tracking by default.** The redirect handler is
+  side-effect free unless the operator opts in via env vars. No
+  analytics calls, no cookies, no logging of referrer / IP / UA in
+  the default deployment.
+- **Click notifications are opt-in via Telegram.** Setting both
+  `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in the Vercel project's
+  environment variables enables a fire-and-forget POST to the
+  Telegram bot API on every click, with city, country, user agent,
+  and referer. Without both env vars, no notification fires. The
+  notification MUST be fire-and-forget (never `await`, always
+  `.catch(() => {})`) - analytics must never block or fail the
+  redirect.
+- **Use one short link per job application** when tracking
+  application engagement. Name files `app-<company>.json` with the
+  matching `slug` (e.g. `/app-google`). The path itself tells you
+  which application received a click, with no need to disambiguate
+  from referer or other signals.
 - **Path matching is normalized** in `redirects.js` before lookup, so
   a request to `/Foo/` and `/foo` resolve identically.
 - **Status codes are per-link**, not a single global default. Pick 307

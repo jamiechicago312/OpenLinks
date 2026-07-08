@@ -4,6 +4,7 @@ const {
   normalizePathname,
 } = require("../redirects");
 const { fallbackDestination, redirectsBySource } = require("../redirects-loader");
+const { notifyClick } = require("../lib/telegram");
 
 const INTERNAL_PATHNAME_QUERY_KEY = "__oh_redirect_pathname";
 
@@ -42,4 +43,13 @@ module.exports = async function handler(req, res) {
   res.setHeader("Location", destinationUrl.toString());
   res.statusCode = redirectDefinition.statusCode;
   res.end();
+
+  notifyClick({
+    shortPath: requestPathname,
+    timestamp: new Date().toISOString(),
+    city: req.headers["x-vercel-ip-city"],
+    country: req.headers["x-vercel-ip-country"],
+    userAgent: req.headers["user-agent"],
+    referer: req.headers["referer"] || req.headers["referrer"],
+  });
 };

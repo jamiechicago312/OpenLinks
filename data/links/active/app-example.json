@@ -1,0 +1,7 @@
+{
+  "slug": "/app-example",
+  "destination": "https://example.com",
+  "permanent": false,
+  "description": "Placeholder for the per-application short-link pattern. In a real deployment, replace `destination` with the URL recruiters should land on for this application, then rename both the file and the `slug` to match the company (for example `/app-google`, `/app-acme`, `/app-startup-x`). The path name is the only signal you need to know which company clicked.",
+  "tags": ["job-application", "example"]
+}
